@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Weapon
+{
+    string Name;
+    int ID;
+} weapon;
+
+Weapon search(vector<Weapon> _w, int _x) {
+    int _counter = _w.size();
+    for (int i = 0; i < _counter; ++i) {
+        if (_w[i].ID == _x) return _w[i];
+    }
+}
+
+int main() {
+    vector<Weapon> weaponList;
+    int n;
+
+    cin >> n;
+    while (n--) {
+        string name;
+        int id;
+        cin >> id >> name;
+        weapon.ID = id;
+        weapon.Name = name;
+        weaponList.push_back(weapon);
+    }
+
+    cin >> n;
+    for( int i =0; i < n; ++i){
+        int a;
+        cin >> a;
+        Weapon tmp = search( weaponList,  a );
+        cout << tmp.Name << " ";
+    }
+
+    return 0;
+}
