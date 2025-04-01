@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+long long lcm(int a, int b) {
+    long long max_num = max(a, b);
+    long long min_num = min(a, b);
+    long long result = max_num;
+
+    while (result % min_num != 0) {
+        result += max_num;
+        if (result < max_num || result < min_num) {
+            result = max_num * min_num;
+            break;
+        }
+    }
+
+    return result;
+}
+   
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << lcm(a, b) << endl;
+    return 0;
+}
