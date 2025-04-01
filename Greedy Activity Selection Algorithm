@@ -1,0 +1,38 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+struct zad{
+    int pocz, koniec;
+};
+
+bool operator < ( zad a, zad b ){
+    return a.koniec == b.koniec ? a.pocz < b.pocz : a.koniec < b.koniec;
+}
+int main()
+{
+    ios::sync_with_stdio( 0 );
+    int n;
+    cin >> n;
+    zad tab[ n ];
+
+    for( int i=0; i<n; i++ ){
+        int p, d;
+        cin >> p >> d;
+        tab[i].pocz = p;
+        tab[i].koniec = p + d;
+    }
+    sort( tab, tab + n );
+
+    int granica = -1, licznik = 0;
+
+    for( int i=0; i<n; ++i ){
+        if( tab[ i ].pocz >= granica ){
+            licznik++;
+            granica = tab[ i ].koniec;
+        }
+    }
+    cout << licznik << endl;
+    return 0;
+}
