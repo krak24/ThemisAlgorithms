@@ -1,0 +1,31 @@
+#include <iostream>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
+}
+
+int main() {
+    int a, b, c, d, e, f;
+    cin >> a >> b >> c >> d >> e >> f;
+
+   
+    int afg = a * c * e;
+    int gdas = b * d * f;
+
+    int dzielnik = gcd(afg, gdas);
+
+    afg /= dzielnik;
+    gdas /= dzielnik;
+
+    cout << afg << "/" << gdas << endl;
+
+    return 0;
+}
