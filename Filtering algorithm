@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Weapon
+{
+    string Name;
+    int ID;
+} weapon;
+
+int main() {
+    vector<Weapon> weaponList;
+
+    int n;
+    cin >> n;
+    while (n--) {
+        string name;
+        int id;
+        cin >> id >> name;
+        weapon.ID = id;
+        weapon.Name = name;
+        weaponList.push_back(weapon);
+    }
+
+    int counter = weaponList.size();
+    for ( int i = 0; i < counter; ++i ) {
+        if( weaponList[i].ID % 10 == 1)
+            cout << weaponList[i].ID << " " << weaponList[i].Name << endl;
+    }
+    return 0;
+}
