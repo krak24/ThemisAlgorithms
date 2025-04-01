@@ -1,0 +1,17 @@
+#include <iostream>
+#include <algorithm>
+
+int main() {
+    int t;
+    std::cin >> t;
+
+    int max = -1e9; 
+    while (t--) {
+        int x;
+        std::cin >> x;
+        max = std::max(max, x);
+        std::cout << max << std::endl;
+    }
+
+    return 0;
+}
