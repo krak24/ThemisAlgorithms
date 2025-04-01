@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::ios_base::sync_with_stdio(false);
+    int c;
+    std::cin >> c;
+    while (c--) {
+        int n, m;
+        std::cin >> n >> m;
+
+        std::vector<std::vector<int>> tab(n, std::vector<int>(m));
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                std::cin >> tab[i][j];
+            }
+        }
+
+        std::vector<int> u(n * m);
+        u[0] = tab[0][0];
+        for (int i = 1; i < n; ++i) {
+            u[i * m] = u[(i - 1) * m] + tab[i][0];
+        }
+        for (int j = 1; j < m; ++j) {
+            u[j] = u[j - 1] + tab[0][j];
+        }
+        for (int i = 1; i < n; ++i) {
+            for (int j = 1; j < m; ++j) {
+                u[i * m + j] = std::max(u[(i - 1) * m + j], u[i * m + j - 1]) + tab[i][j];
+            }
+        }
+
+        std::cout << u[n * m - 1] << "\n";
+    }
+    return 0;
+}
