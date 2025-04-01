@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+const int MAX_N = 1000;
+const int INF = 1e9;
+
+int n, m, a[MAX_N][MAX_N], dp[MAX_N][MAX_N], prev_col[MAX_N][MAX_N];
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    cin >> n >> m;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> a[i][j];
+            dp[i][j] = INF;
+        }
+    }
+
+    for (int j = 0; j < m; j++) {
+        for (int i = 0; i < n; i++) {
+            if (j == 0) {
+                dp[i][j] = a[i][j];
+                prev_col[i][j] = -1;
+            } else {
+                for (int k = -1; k <= 1; k++) {
+                    if (i + k >= 0 && i + k < n) {
+                        if (dp[i][j] > dp[i + k][j - 1] + a[i][j]) {
+                            dp[i][j] = dp[i + k][j - 1] + a[i][j];
+                            prev_col[i][j] = i + k;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    int min_cost = INF;
+    int min_idx = -1;
+    for (int i = 0; i < n; i++) {
+        if (dp[i][m - 1] < min_cost) {
+            min_cost = dp[i][m - 1];
+            min_idx = i;
+        }
+    }
+
+    vector<int> path(m);
+    path[m - 1] = min_idx;
+    for (int j = m - 2; j >= 0; j--) {
+        path[j] = prev_col[path[j + 1]][j + 1];
+    }
+
+    for (int j = 0; j < m; j++) {
+        cout << path[j] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
